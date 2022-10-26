@@ -1,8 +1,10 @@
-
+import Header from './components/Header'
+import Jumbotron from './components/Jumbotron'
 function App() {
   return (
     <div className="App">
-      <h1>Consulta da Previsão do tempo</h1>
+      <Header/>
+      <Jumbotron/>
     </div>
   );
 }
