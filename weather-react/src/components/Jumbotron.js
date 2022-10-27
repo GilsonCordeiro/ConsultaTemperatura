@@ -1,4 +1,27 @@
+import { useState } from 'react'
+
+
 function Jumbotron(){
+    const [city, setCity] = useState("Brasília")
+
+    const handleChang = (e)=>{
+        setCity(e.target.value)
+    }
+
+    const handleSearch = () => {
+       
+        fetch(`http://api.weatherapi.com/v1/current.json?key=d5c87313143a42fea5a122841222610&q=${city}&lang=pt`)
+        .then ((response ) =>{
+            console.log("response ===>", response)
+            if(response.status === 200){
+                return response.json()
+            }
+        })
+        .then((data) => {
+            console.log('data ===>', data)
+        });
+    }
+
     return(
         <div>         
                 <div className="jumbotron jumbotron-fluid">
@@ -7,10 +30,13 @@ function Jumbotron(){
                     <p className="lead">Digite o nome de sua cidade abaixo e em seguida clique em pesquisar </p>
                     <div className= "row mb-4">
                         <div className="col-md-6">
-                            <input className="form-control"/>
+                            <input
+                             onChange={handleChang}
+                             className="form-control" 
+                             value={city}/>
                         </div>
                     </div>
-                    <button className="btn btn-primary" >
+                    <button onClick={handleSearch} className="btn btn-primary" >
                         Pesquisar
                     </button>
                 </div>
